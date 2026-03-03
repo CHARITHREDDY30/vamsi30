@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRODVTECH | Artificial Intelligence</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;700;900&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bronze: #d4af37;
+            --obsidian: #050505;
+        }
+        body { background-color: var(--obsidian); color: white; font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+        
+        .text-bronze { color: var(--bronze); }
+        .bg-bronze { background-color: var(--bronze); }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass:hover {
+            
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+            transform: translateY(-5px);
+        }
+
+        /* Brain Pulse Animation */
+        .brain-core {
+            position: relative;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(212,175,55,0.2) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            animation: pulse 3s infinite ease-in-out;
+        }
+        @keyframes pulse { 0% { transform: scale(0.95); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 60px rgba(212,175,55,0.3); } 100% { transform: scale(0.95); opacity: 0.5; } }
+
+        /* Marquee */
+        .marquee-container { overflow: hidden; white-space: nowrap; position: relative; }
+        .marquee-content { display: inline-block; animation: marquee 25s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+      .mobile-menu{
+    position: fixed;
+    top: 75px;
+    left: 16px;
+    right: 16px;
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    padding:26px;
+
+    background: rgba(10,10,10,0.8);
+    backdrop-filter: blur(18px);
+
+    border-radius:18px;
+    border:1px solid rgba(212,175,55,0.15);
+
+    box-shadow:0 20px 60px rgba(0,0,0,0.7);
+
+    transform: translateY(-20px);
+    opacity:0;
+    pointer-events:none;
+
+    transition:.35s ease;
+}
+
+.mobile-menu a{
+    letter-spacing:.15em;
+    font-size:14px;
+    color:#e5e5e5;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    padding-bottom:10px;
+}
+
+.mobile-menu a:hover{
+    color:#d4af37;
+}
+
+.mobile-nav-open .mobile-menu{
+    transform: translateY(0);
+    opacity:1;
+    pointer-events:auto;
+}
+
+.nav-link{
+    transition:.25s;
+}
+
+.nav-link:hover{
+    color:#d4af37;
+}
+
+/* ACTIVE PAGE */
+.nav-active{
+    color:#d4af37;
+    border-bottom:1px solid #d4af37;
+    padding-bottom:4px;
+}
+
+.mobile-menu{
+    position: fixed;
+    top: 75px;
+    left: 16px;
+    right: 16px;
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    padding:26px;
+
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(18px);
+
+    border-radius:18px;
+    border:1px solid rgba(212,175,55,0.15);
+
+    box-shadow:0 20px 60px rgba(0,0,0,0.7);
+
+    transform: translateY(-20px);
+    opacity:0;
+    pointer-events:none;
+
+    transition:.35s ease;
+}
+
+.mobile-menu a{
+    letter-spacing:.15em;
+    font-size:14px;
+    color:#e5e5e5;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    padding-bottom:10px;
+}
+
+.mobile-menu a:hover{
+    color:#d4af37;
+}
+
+.mobile-nav-open .mobile-menu{
+    transform: translateY(0);
+    opacity:1;
+    pointer-events:auto;
+}
+
+    </style>
+</head>
+<body class="selection:bg-purple-500 selection:text-white">
+
+   <nav id="navbar" class="fixed w-full top-0 z-[9999] glass py-4">
+    
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        
+        <!-- LOGO -->
+        <a href="index.html" class="text-2xl font-black tracking-widest text-white">
+            CRODV<span class="text-bronze">TECH</span>
+        </a>
+
+        <!-- DESKTOP MENU -->
+        <div class="hidden md:flex space-x-8 text-xs font-bold tracking-widest">
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="fullstack.html" class="nav-link">FULLSTACK</a>
+            <a href="ai.html" class="nav-link">AI & ML</a>
+            <a href="vlsi.html" class="nav-link">VLSI & IOT</a>
+            <a href="careerpage3.html" class="nav-link">CAREERS</a>
+            <a href="#" class="nav-link">CONTACT</a>
+        </div>
+
+        <!-- HAMBURGER -->
+        <button id="mobileMenuToggle" class="md:hidden text-white text-2xl">
+            ☰
+        </button>
+
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu md:hidden">
+        <a href="index.html" class="nav-link">HOME</a>
+        <a href="fullstack.html" class="nav-link">FULLSTACK</a>
+        <a href="ai.html" class="nav-link">AI & ML</a>
+        <a href="vlsi.html" class="nav-link">VLSI & IOT</a>
+        <a href="careerpage3.html" class="nav-link">CAREERS</a>
+        <a href="#" class="nav-link">CONTACT</a>
+    </div>
+
+</nav>
+
+
+    <section class="relative pt-40 pb-20 px-6 min-h-[90vh] flex items-center">
+        <div class="absolute inset-0 z-0 opacity-20" style="background-image: radial-gradient(#d4af37 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-bronze tracking-[0.3em] text-xs font-bold uppercase mb-4 block">Neural Engineering</span>
+                <h1 class="text-6xl md:text-8xl font-black mb-6 leading-none">
+                    DATA <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-600">ALCHEMY.</span>
+                </h1>
+                <p class="text-xl text-gray-400 mb-8 font-light border-l-2 border-bronze pl-6 max-w-lg">
+                    We build brains for your business. From <strong>LLM Wrappers</strong> (Custom Chatbots) to <strong>Predictive Analytics</strong> that foresee market trends.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects" class="px-8 py-4 bg-bronze text-black font-bold tracking-widest hover:bg-white transition shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                        VIEW MODELS
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-center relative">
+                <div class="brain-core flex items-center justify-center">
+                    <i class="fas fa-brain text-7xl text-bronze z-10"></i>
+                    <div class="absolute w-[350px] h-[350px] border border-bronze/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                    <div class="absolute w-[450px] h-[450px] border border-dashed border-bronze/10 rounded-full animate-[spin_20s_linear_infinite_reverse]"></div>
+                    <div class="absolute top-0 right-10 w-2 h-2 bg-white rounded-full animate-ping"></div>
+                    <div class="absolute bottom-10 left-10 w-2 h-2 bg-bronze rounded-full animate-ping delay-700"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-black border-y border-white/10 overflow-hidden relative">
+        <div class="absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-black to-transparent z-10"></div>
+        <div class="absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-black to-transparent z-10"></div>
+        <div class="marquee-container">
+            <div class="marquee-content text-4xl font-bold text-gray-800 space-x-16 uppercase tracking-tighter">
+                <span>Python</span> <span>TensorFlow</span> <span>PyTorch</span> <span>OpenAI API</span> <span>LangChain</span> <span>Hugging Face</span> <span>CUDA</span> <span>Pandas</span> <span>Scikit-Learn</span>
+                <span>Python</span> <span>TensorFlow</span> <span>PyTorch</span> <span>OpenAI API</span> <span>LangChain</span> <span>Hugging Face</span> <span>CUDA</span> <span>Pandas</span> <span>Scikit-Learn</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black text-white">Our Intelligence Layer</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass p-10 rounded-xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition text-6xl">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Generative AI</h3>
+                    <p class="text-gray-400 text-sm leading-7">
+                        Fine-tuning models like LLaMA or GPT-4 on your private company data to create secure, internal knowledge bots.
+                    </p>
+                </div>
+
+                <div class="glass p-10 rounded-xl relative overflow-hidden group border-bronze/30">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition text-6xl">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Computer Vision</h3>
+                    <p class="text-gray-400 text-sm leading-7">
+                        Automated quality control for factories using cameras, or facial recognition systems for high-security access.
+                    </p>
+                </div>
+
+                <div class="glass p-10 rounded-xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition text-6xl">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Predictive Analytics</h3>
+                    <p class="text-gray-400 text-sm leading-7">
+                        Turn raw data into future insights. We build algorithms that predict stock trends, customer churn, and sales volume.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-24 bg-black border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <span class="text-bronze text-xs font-bold tracking-[0.3em] uppercase">Case Studies</span>
+                    <h2 class="text-4xl font-black text-white mt-2">Deployed Models</h2>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group bg-[#111] border border-white/5 rounded-xl overflow-hidden hover:border-bronze/50 transition duration-500">
+                    <div class="h-48 w-full bg-gray-900 flex items-center justify-center relative">
+                        <i class="fas fa-robot text-4xl text-gray-700"></i>
+                        <div class="absolute inset-0 bg-bronze/10 opacity-0 group-hover:opacity-100 transition"></div>
+                        </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-bronze transition">Legal Doc Summarizer</h3>
+                        <p class="text-gray-500 text-sm mb-4">An NLP tool that condenses 50-page legal contracts into 1-page summaries with 98% accuracy.</p>
+                        <span class="text-xs font-bold bg-white/10 px-2 py-1 rounded text-gray-300">NLP</span>
+                    </div>
+                </div>
+
+                <div class="group bg-[#111] border border-white/5 rounded-xl overflow-hidden hover:border-bronze/50 transition duration-500">
+                    <div class="h-48 w-full bg-gray-900 flex items-center justify-center relative">
+                        <i class="fas fa-camera text-4xl text-gray-700"></i>
+                        <div class="absolute inset-0 bg-bronze/10 opacity-0 group-hover:opacity-100 transition"></div>
+                        </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-bronze transition">Defect Detection System</h3>
+                        <p class="text-gray-500 text-sm mb-4">Computer vision system installed in a manufacturing plant to auto-reject defective parts.</p>
+                        <span class="text-xs font-bold bg-white/10 px-2 py-1 rounded text-gray-300">VISION</span>
+                    </div>
+                </div>
+
+                <div class="group bg-[#111] border border-white/5 rounded-xl overflow-hidden hover:border-bronze/50 transition duration-500">
+                    <div class="h-48 w-full bg-gray-900 flex items-center justify-center relative">
+                        <i class="fas fa-users text-4xl text-gray-700"></i>
+                        <div class="absolute inset-0 bg-bronze/10 opacity-0 group-hover:opacity-100 transition"></div>
+                        </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-bronze transition">Customer Support Bot</h3>
+                        <p class="text-gray-500 text-sm mb-4">A custom GPT-4 wrapper integrated into a client's website handling 80% of L1 queries.</p>
+                        <span class="text-xs font-bold bg-white/10 px-2 py-1 rounded text-gray-300">CHATBOT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#050505] border-t border-white/10 py-8 text-center">
+        <p class="text-gray-600 text-xs">© 2025 CRODVTECH. Intelligence Deployed.</p>
+    </footer>
+
+    <script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const toggle = document.getElementById("mobileMenuToggle");
+
+    if(!toggle) return;
+
+    toggle.addEventListener("click", function(){
+
+        document.body.classList.toggle("mobile-nav-open");
+
+        toggle.innerHTML =
+        document.body.classList.contains("mobile-nav-open")
+        ? "✕"
+        : "☰";
+
+    });
+
+});
+
+</script>
+
+<script>
+
+const links = document.querySelectorAll(".nav-link");
+const currentPage = window.location.pathname.split("/").pop();
+
+links.forEach(link => {
+
+    const linkPage = link.getAttribute("href");
+
+    if(linkPage === currentPage){
+        link.classList.add("nav-active");
+    }
+
+});
+
+</script>
+
+    
+
+</body>
+</html>

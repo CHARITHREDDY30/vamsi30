@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRODVTECH | Fullstack Ecosystems</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;700;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bronze: #d4af37;
+            --obsidian: #050505;
+        }
+        body { background-color: var(--obsidian); color: white; font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+        
+        /* --- UTILITIES --- */
+        .text-bronze { color: var(--bronze); }
+        .bg-bronze { background-color: var(--bronze); }
+        .border-bronze { border-color: var(--bronze); }
+        
+        /* --- GLASSMORPHISM --- */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass:hover {
+            
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+            transform: translateY(-5px);
+        }
+
+        /* --- BACKGROUND GRAPHICS --- */
+        .cyber-grid {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%); 
+            /* Note: mask-image creates a fade-out effect for the grid */
+        }
+
+        .glow-orb {
+            position: absolute;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* --- TYPING ANIMATION --- */
+        .typing-effect { 
+            font-family: 'Fira Code', monospace; 
+            overflow: hidden; 
+            white-space: nowrap; 
+            border-right: 2px solid var(--bronze); 
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; 
+        }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--bronze); } }
+
+        /* --- TECH STACK MARQUEE --- */
+        .marquee-container { overflow: hidden; white-space: nowrap; position: relative; }
+        .marquee-content { display: inline-block; animation: marquee 20s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+
+        .nav-link{
+    transition:.25s;
+}
+
+.nav-link:hover{
+    color:#d4af37;
+}
+
+/* ACTIVE PAGE */
+.nav-active{
+    color:#d4af37;
+    border-bottom:1px solid #d4af37;
+    padding-bottom:4px;
+}
+
+.mobile-menu{
+    position: fixed;
+    top: 75px;
+    left: 16px;
+    right: 16px;
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    padding:26px;
+
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(18px);
+
+    border-radius:18px;
+    border:1px solid rgba(212,175,55,0.15);
+
+    box-shadow:0 20px 60px rgba(0,0,0,0.7);
+
+    transform: translateY(-20px);
+    opacity:0;
+    pointer-events:none;
+
+    transition:.35s ease;
+}
+
+.mobile-menu a{
+    letter-spacing:.15em;
+    font-size:14px;
+    color:#e5e5e5;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    padding-bottom:10px;
+}
+
+.mobile-menu a:hover{
+    color:#d4af37;
+}
+
+.mobile-nav-open .mobile-menu{
+    transform: translateY(0);
+    opacity:1;
+    pointer-events:auto;
+}
+
+    </style>
+</head>
+<body class="selection:bg-[#d4af37] selection:text-black">
+
+   <nav id="navbar" class="fixed w-full top-0 z-[9999] glass py-4">
+    
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        
+        <!-- LOGO -->
+        <a href="index.html" class="text-2xl font-black tracking-widest text-white">
+            CRODV<span class="text-bronze">TECH</span>
+        </a>
+
+        <!-- DESKTOP MENU -->
+        <div class="hidden md:flex space-x-8 text-xs font-bold tracking-widest">
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="fullstack.html" class="nav-link">FULLSTACK</a>
+            <a href="ai.html" class="nav-link">AI & ML</a>
+            <a href="vlsi.html" class="nav-link">VLSI & IOT</a>
+            <a href="careerpage3.html" class="nav-link">CAREERS</a>
+            <a href="#" class="nav-link">CONTACT</a>
+        </div>
+
+        <!-- HAMBURGER -->
+        <button id="mobileMenuToggle" class="md:hidden text-white text-2xl">
+            ☰
+        </button>
+
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu md:hidden">
+        <a href="index.html" class="nav-link">HOME</a>
+        <a href="fullstack.html" class="nav-link">FULLSTACK</a>
+        <a href="ai.html" class="nav-link">AI & ML</a>
+        <a href="vlsi.html" class="nav-link">VLSI & IOT</a>
+        <a href="careerpage3.html" class="nav-link">CAREERS</a>
+        <a href="#" class="nav-link">CONTACT</a>
+    </div>
+
+</nav>
+
+
+    <section class="relative pt-40 pb-20 px-6 min-h-[90vh] flex items-center overflow-hidden">
+        <div class="absolute inset-0 cyber-grid z-0"></div>
+        <div class="glow-orb top-20 left-20"></div>
+        <div class="glow-orb bottom-20 right-20"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 border border-white/10 rounded-full mb-6 bg-white/5 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span class="text-[10px] font-mono tracking-widest uppercase text-gray-300">System Status: Online</span>
+                </div>
+                
+                <h1 class="text-6xl md:text-8xl font-black mt-2 mb-6 leading-none">
+                    CODE <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-gray-500">WITHOUT</span> <br>
+                    <span class="text-bronze">LIMITS.</span>
+                </h1>
+                
+                <p class="text-gray-400 text-lg leading-relaxed mb-8 max-w-lg border-l-2 border-bronze pl-6">
+                    We architect scalable digital ecosystems. From high-frequency trading dashboards to massive Edutech platforms.
+                    <br><br>
+                    <span class="text-white font-bold">Fast. Secure. Bulletproof.</span>
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects" class="px-8 py-4 bg-bronze text-black font-bold tracking-widest hover:bg-white transition shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                        VIEW WORK
+                    </a>
+                    <a href="#tech-stack" class="px-8 py-4 border border-white/20 text-white font-bold tracking-widest hover:border-bronze hover:text-bronze transition">
+                        OUR STACK
+                    </a>
+                </div>
+            </div>
+
+            <div class="glass p-1 rounded-xl shadow-2xl transform rotate-1 hover:rotate-0 transition duration-500">
+                <div class="bg-[#0f0f0f] rounded-lg overflow-hidden border border-white/5">
+                    <div class="bg-[#1a1a1a] px-4 py-2 flex items-center gap-2 border-b border-white/5">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <span class="ml-4 text-[10px] text-gray-500 font-mono">deploy_production.sh</span>
+                    </div>
+                    <div class="p-6 font-mono text-xs md:text-sm text-gray-300 space-y-3 h-[300px] overflow-y-auto">
+                        <div class="flex gap-2">
+                            <span class="text-green-400">➜</span>
+                            <span class="text-blue-400">~/crodvtech</span>
+                            <span>$ init --enterprise-mode</span>
+                        </div>
+                        <p class="text-gray-500">> Loading core modules...</p>
+                        <div class="text-yellow-500">> [WARNING] High performance detected.</div>
+                        <p>> Optimizing database queries...</p>
+                        <p>> Connecting to AWS Cloud Cluster...</p>
+                        <div class="p-3 bg-white/5 border-l-2 border-green-500 my-2">
+                            <span class="text-green-400">✓ SUCCESS:</span> Architecture scaled to 1M+ users.
+                        </div>
+                        <p class="typing-effect text-bronze w-fit">> Ready for deployment_</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tech-stack" class="py-12 bg-black border-y border-white/10 overflow-hidden relative">
+        <div class="absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-black to-transparent z-10"></div>
+        <div class="absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-black to-transparent z-10"></div>
+        
+        <div class="marquee-container">
+            <div class="marquee-content text-4xl font-bold text-gray-700 space-x-16 uppercase tracking-tighter">
+                <span>React.js</span> <span>Next.js</span> <span>Python</span> <span>Node.js</span> <span>Flutter</span> <span>AWS</span> <span>Docker</span> <span>PostgreSQL</span> <span>GraphQL</span>
+                <span>React.js</span> <span>Next.js</span> <span>Python</span> <span>Node.js</span> <span>Flutter</span> <span>AWS</span> <span>Docker</span> <span>PostgreSQL</span> <span>GraphQL</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-[#0a0a0a] relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-bronze text-xs font-bold tracking-[0.3em] uppercase">Workflow</span>
+                <h2 class="text-4xl font-black text-white mt-2">How We Build</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass p-8 rounded-xl relative group">
+                    <div class="absolute -top-6 left-8 text-8xl font-black text-white/5 group-hover:text-bronze/10 transition">01</div>
+                    <i class="fas fa-layer-group text-3xl text-bronze mb-6"></i>
+                    <h3 class="text-xl font-bold mb-3">Architecture First</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        We don't just code; we plan. We design the database schema, API endpoints, and cloud infrastructure before writing a single line.
+                    </p>
+                </div>
+                <div class="glass p-8 rounded-xl relative group border-bronze/30">
+                    <div class="absolute -top-6 left-8 text-8xl font-black text-white/5 group-hover:text-bronze/10 transition">02</div>
+                    <i class="fas fa-code text-3xl text-bronze mb-6"></i>
+                    <h3 class="text-xl font-bold mb-3">Agile Sprints</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Two-week development cycles. You get regular updates, testable links, and continuous integration (CI/CD) pipelines.
+                    </p>
+                </div>
+                <div class="glass p-8 rounded-xl relative group">
+                    <div class="absolute -top-6 left-8 text-8xl font-black text-white/5 group-hover:text-bronze/10 transition">03</div>
+                    <i class="fas fa-rocket text-3xl text-bronze mb-6"></i>
+                    <h3 class="text-xl font-bold mb-3">Scale & Deploy</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Launch day is just the start. We set up auto-scaling on AWS/Azure so your app handles 100 or 1 million users effortlessly.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-24 bg-black border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <span class="text-bronze text-xs font-bold tracking-[0.3em] uppercase">Portfolio</span>
+                    <h2 class="text-4xl font-black text-white mt-2">Selected Works</h2>
+                </div>
+                <button class="hidden md:block px-6 py-2 border border-white/20 text-xs font-bold hover:bg-white hover:text-black transition">VIEW GITHUB</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="group relative bg-[#111] border border-white/5 rounded-xl overflow-hidden hover:border-bronze/50 transition duration-500">
+                    <div class="h-48 w-full bg-gray-800 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-image text-4xl text-gray-700"></i>
+                        <div class="absolute inset-0 bg-bronze/10 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        </div>
+                    
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-2 py-1 text-[10px] font-bold bg-white/5 text-bronze border border-bronze/20 rounded">REACT</span>
+                            <span class="px-2 py-1 text-[10px] font-bold bg-white/5 text-gray-400 border border-white/10 rounded">NODE.JS</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-bronze transition">EduLearn Pro Platform</h3>
+                        <p class="text-gray-500 text-sm mb-4">A complete LMS for a startup, featuring video streaming, quizzes, and live progress tracking.</p>
+                        <a href="#" class="text-xs font-bold tracking-widest border-b border-transparent group-hover:border-bronze transition">VIEW CASE STUDY ↗</a>
+                    </div>
+                </div>
+
+                <div class="group relative bg-[#111] border border-white/5 rounded-xl overflow-hidden hover:border-bronze/50 transition duration-500">
+                    <div class="h-48 w-full bg-gray-800 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-image text-4xl text-gray-700"></i>
+                        <div class="absolute inset-0 bg-bronze/10 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-2 py-1 text-[10px] font-bold bg-white/5 text-bronze border border-bronze/20 rounded">FLUTTER</span>
+                            <span class="px-2 py-1 text-[10px] font-bold bg-white/5 text-gray-400 border border-white/10 rounded">FIREBASE</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-bronze transition">ShopEasy Mobile App</h3>
+                        <p class="text-gray-500 text-sm mb-4">Cross-platform mobile application with real-time inventory updates and secure Stripe payments.</p>
+                        <a href="#" class="text-xs font-bold tracking-widest border-b border-transparent group-hover:border-bronze transition">VIEW CASE STUDY ↗</a>
+                    </div>
+                </div>
+
+                <div class="group relative bg-[#111] border border-white/5 rounded-xl overflow-hidden hover:border-bronze/50 transition duration-500">
+                    <div class="h-48 w-full bg-gray-800 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-image text-4xl text-gray-700"></i>
+                        <div class="absolute inset-0 bg-bronze/10 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-2 py-1 text-[10px] font-bold bg-white/5 text-bronze border border-bronze/20 rounded">NEXT.JS</span>
+                            <span class="px-2 py-1 text-[10px] font-bold bg-white/5 text-gray-400 border border-white/10 rounded">PYTHON</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-bronze transition">FinData Dashboard</h3>
+                        <p class="text-gray-500 text-sm mb-4">High-performance analytics dashboard processing millions of data points in real-time.</p>
+                        <a href="#" class="text-xs font-bold tracking-widest border-b border-transparent group-hover:border-bronze transition">VIEW CASE STUDY ↗</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-bronze/10 to-transparent"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-black mb-6">Have a Vision?</h2>
+            <p class="text-xl text-gray-400 mb-10">Let's turn your requirements into a deployed product.</p>
+            <a href="index.html#contact" class="inline-block px-12 py-5 bg-bronze text-black font-bold tracking-widest rounded-sm hover:scale-105 transition transform shadow-[0_0_30px_rgba(212,175,55,0.4)]">
+                START ENGINEERING
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-[#050505] border-t border-white/10 py-8">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-gray-600 text-xs">© 2025 CRODVTECH. REGISTERED IN INDIA.</p>
+        </div>
+    </footer>
+
+    <script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const toggle = document.getElementById("mobileMenuToggle");
+
+    if(!toggle) return;
+
+    toggle.addEventListener("click", function(){
+
+        document.body.classList.toggle("mobile-nav-open");
+
+        toggle.innerHTML =
+        document.body.classList.contains("mobile-nav-open")
+        ? "✕"
+        : "☰";
+
+    });
+
+});
+
+</script>
+
+<script>
+
+const links = document.querySelectorAll(".nav-link");
+const currentPage = window.location.pathname.split("/").pop();
+
+links.forEach(link => {
+
+    const linkPage = link.getAttribute("href");
+
+    if(linkPage === currentPage){
+        link.classList.add("nav-active");
+    }
+
+});
+
+</script>
+
+
+</body>
+</html>

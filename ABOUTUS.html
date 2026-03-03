@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | CRODVTECH</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@200;400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bronze: #d4af37;
+            --bronze-dark: #aa8036;
+            --obsidian: #050505;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--obsidian);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Reusing your Premium UI Components */
+        .text-bronze-gradient {
+            background: linear-gradient(to right, #ffffff, var(--bronze), var(--bronze-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Nav Logic from Index */
+        @media (max-width: 768px) {
+            .nav-links { display:none; }
+        }
+        .mobile-nav-open .mobile-menu { transform: translateY(0); opacity: 1; pointer-events: auto; }
+        .mobile-menu {
+            position: fixed; top: 85px; left: 16px; right: 16px;
+            display: flex; flex-direction: column; gap: 18px; padding: 28px;
+            background: rgba(10,10,10,0.95); backdrop-filter: blur(18px);
+            border: 1px solid rgba(212,175,55,0.15); border-radius: 20px;
+            transform: translateY(-20px); opacity: 0; pointer-events: none; transition: all .35s ease; z-index: 1000;
+        }
+
+        .mobile-menu{
+    position: fixed;
+    top: 75px;
+    left: 16px;
+    right: 16px;
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    padding:26px;
+
+    background: rgba(10,10,10,0.8);
+    backdrop-filter: blur(18px);
+
+    border-radius:18px;
+    border:1px solid rgba(212,175,55,0.15);
+
+    box-shadow:0 20px 60px rgba(0,0,0,0.7);
+
+    transform: translateY(-20px);
+    opacity:0;
+    pointer-events:none;
+
+    transition:.35s ease;
+}
+
+.mobile-menu a{
+    letter-spacing:.15em;
+    font-size:14px;
+    color:#e5e5e5;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    padding-bottom:10px;
+}
+
+.mobile-menu a:hover{
+    color:#d4af37;
+}
+
+.mobile-nav-open .mobile-menu{
+    transform: translateY(0);
+    opacity:1;
+    pointer-events:auto;
+}
+
+.nav-link{
+    transition:.25s;
+}
+
+.nav-link:hover{
+    color:#d4af37;
+}
+
+/* ACTIVE PAGE */
+.nav-active{
+    color:#d4af37;
+    border-bottom:1px solid #d4af37;
+    padding-bottom:4px;
+}
+
+.mobile-menu{
+    position: fixed;
+    top: 75px;
+    left: 16px;
+    right: 16px;
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    padding:26px;
+
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(18px);
+
+    border-radius:18px;
+    border:1px solid rgba(212,175,55,0.15);
+
+    box-shadow:0 20px 60px rgba(0,0,0,0.7);
+
+    transform: translateY(-20px);
+    opacity:0;
+    pointer-events:none;
+
+    transition:.35s ease;
+}
+
+.mobile-menu a{
+    letter-spacing:.15em;
+    font-size:14px;
+    color:#e5e5e5;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    padding-bottom:10px;
+}
+
+.mobile-menu a:hover{
+    color:#d4af37;
+}
+
+.mobile-nav-open .mobile-menu{
+    transform: translateY(0);
+    opacity:1;
+    pointer-events:auto;
+}
+
+.nav-link.active {
+    color: #D4AF37;
+    border-bottom: 2px solid #D4AF37;
+}
+
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas-container"></canvas>
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-black tracking-widest text-white z-50">
+                CRODV<span class="text-[#d4af37]">TECH</span>
+            </a>
+            
+                 <div class="hidden md:flex space-x-8 text-xs font-bold tracking-widest">
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="ABOUTUS.html" class="nav-link">ABOUT US</a>
+            <a href="SERVICES.html" class="nav-link">SERVICES</a>
+            <a href="https://grow02x.com/" class="nav-link">LEARN</a>
+            <div class="relative group">
+    <a href="#" class="nav-link flex items-center gap-1">
+        CAREERS
+        <i class="fas fa-chevron-down text-[10px] transition-transform duration-300 group-hover:rotate-180"></i>
+    </a>
+
+    <!-- DROPDOWN -->
+    <div class="absolute left-0 mt-4 w-56 bg-[#0f0f0f] border border-white/10 rounded-xl opacity-0 invisible translate-y-4 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 shadow-2xl">
+
+        <a href="careerpage3.html"
+           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-black rounded-t-xl transition">
+            FULL TIME ROLES
+        </a>
+
+        <a href="INTERNSHIPS.html"
+           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-black rounded-b-xl transition">
+            INTERNSHIPS
+        </a>
+
+    </div>
+</div>
+            <a href="contactus.html" class="nav-link">CONTACT US</a>
+            </div>
+
+            <button class="md:hidden text-white text-2xl z-50" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+     <div class="mobile-menu md:hidden">
+        <a href="index.html" class="nav-link">HOME</a>
+        <a href="ABOUTUS.html" class="nav-link">ABOUT US</a>
+        <a href="SERVICES.html" class="nav-link">SERVICES</a>
+        <a href="https://grow02x.com/" class="nav-link">LEARN</a>
+        <div class="relative group">
+    <a href="#" class="nav-link flex items-center gap-1">
+        CAREERS
+        <i class="fas fa-chevron-down text-[10px] transition-transform duration-300 group-hover:rotate-180"></i>
+    </a>
+
+    <!-- DROPDOWN -->
+    <div class="absolute left-0 mt-4 w-56 bg-[#0f0f0f] border border-white/10 rounded-xl opacity-0 invisible translate-y-4 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 shadow-2xl">
+
+        <a href="careerpage3.html"
+           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-black rounded-t-xl transition">
+            FULL TIME ROLES
+        </a>
+
+        <a href="INTERNSHIPS.html"
+           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-black rounded-b-xl transition">
+            INTERNSHIPS
+        </a>
+
+    </div>
+</div>
+        <a href="contactus.html" class="nav-link">CONTACT US</a>
+    </div>
+
+    <section class="relative pt-40 pb-20 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-black mb-6 reveal">
+                ABOUT <span class="text-bronze-gradient">US.</span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto font-light reveal delay-100">
+                CRODVTECH isn't just a development agency. We are a collective of engineers, architects, and visionaries dedicated to building the infrastructure of tomorrow.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-xs font-bold text-bronze uppercase tracking-[0.5em] mb-4 reveal">The Workflow</h2>
+        <h3 class="text-4xl font-bold mb-16 reveal">End-to-End <span class="text-bronze-gradient">Vertical Integration.</span></h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="glass p-8 rounded-2xl border-l-2 border-bronze/30 hover:border-bronze transition-all reveal">
+                <span class="text-5xl font-black text-white/5 absolute top-4 right-4">01</span>
+                <h4 class="text-xl font-bold mb-3">Architect</h4>
+                <p class="text-gray-500 text-sm">Defining chip-level logic, FPGA requirements, and IoT sensor networks.</p>
+            </div>
+            <div class="glass p-8 rounded-2xl border-l-2 border-bronze/30 hover:border-bronze transition-all reveal delay-100">
+                <span class="text-5xl font-black text-white/5 absolute top-4 right-4">02</span>
+                <h4 class="text-xl font-bold mb-3">Engineer</h4>
+                <p class="text-gray-500 text-sm">Building robust Node/Python backends and integrating custom LLM models.</p>
+            </div>
+            <div class="glass p-8 rounded-2xl border-l-2 border-bronze/30 hover:border-bronze transition-all reveal delay-200">
+                <span class="text-5xl font-black text-white/5 absolute top-4 right-4">03</span>
+                <h4 class="text-xl font-bold mb-3">Optimize</h4>
+                <p class="text-gray-500 text-sm">Refining UI/UX for React frontends and stress-testing API latency.</p>
+            </div>
+            <div class="glass p-8 rounded-2xl border-l-2 border-bronze/30 hover:border-bronze transition-all reveal delay-300">
+                <span class="text-5xl font-black text-white/5 absolute top-4 right-4">04</span>
+                <h4 class="text-xl font-bold mb-3">Deploy</h4>
+                <p class="text-gray-500 text-sm">Automated CI/CD pipelines and secure cloud infrastructure rollout.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="py-12 bg-white/5 overflow-hidden whitespace-nowrap relative border-y border-white/5">
+    <div class="flex animate-marquee items-center gap-12">
+        <span class="text-gray-500 font-bold text-xl tracking-widest opacity-40">REACT</span>
+        <span class="text-bronze font-bold text-xl tracking-widest">FPGA</span>
+        <span class="text-gray-500 font-bold text-xl tracking-widest opacity-40">PYTORCH</span>
+        <span class="text-bronze font-bold text-xl tracking-widest">NODE.JS</span>
+        <span class="text-gray-500 font-bold text-xl tracking-widest opacity-40">VERILOG</span>
+        <span class="text-bronze font-bold text-xl tracking-widest">AWS</span>
+        <span class="text-gray-500 font-bold text-xl tracking-widest opacity-40">DOCKER</span>
+        <span class="text-bronze font-bold text-xl tracking-widest">TENSORFLOW</span>
+        </div>
+</div>
+
+<style>
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+    display: flex;
+    width: 200%;
+    animation: marquee 20s linear infinite;
+}
+</style>
+
+<section class="py-24 bg-[#0a0a0a]">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20">
+        <div class="reveal">
+            <h2 class="text-4xl font-bold mb-8">Not just developers, <br><span class="text-bronze">Proprietors.</span></h2>
+            <p class="text-gray-400 mb-6">At CRODVTECH, we don't believe in "ticket-taking." Every engineer is an owner of the project’s success. We challenge requirements, optimize architecture, and suggest pivots that save costs and increase performance.</p>
+            <div class="space-y-4">
+                <div class="flex items-start gap-4">
+                    <div class="text-bronze mt-1"><i class="fas fa-microchip"></i></div>
+                    <div>
+                        <h5 class="font-bold">Hardware-First Mindset</h5>
+                        <p class="text-xs text-gray-500">We optimize code for the hardware it runs on, ensuring maximum efficiency.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="text-bronze mt-1"><i class="fas fa-shield-halved"></i></div>
+                    <div>
+                        <h5 class="font-bold">Security as Standard</h5>
+                        <p class="text-xs text-gray-500">Encryption isn't a feature; it's the foundation of everything we build.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="relative reveal delay-200">
+            <div class="aspect-square bg-gradient-to-br from-bronze/20 to-transparent rounded-full absolute -top-10 -right-10 w-64 h-64 blur-3xl"></div>
+            <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80" alt="Engineering Lab" class="rounded-2xl grayscale hover:grayscale-0 transition-all duration-700 border border-white/10 relative z-10">
+        </div>
+    </div>
+</section>
+
+    <section class="py-20 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="reveal">
+                <h2 class="text-3xl font-bold mb-6 border-l-4 border-bronze pl-6">Bridging the Gap</h2>
+                <p class="text-gray-400 leading-relaxed mb-6">
+                    In an era where software and hardware are becoming inseparable, we specialize in the "Deep Tech" intersection. We understand the physics of the chip (VLSI) as well as the logic of the Cloud.
+                </p>
+                <p class="text-gray-400 leading-relaxed">
+                    Our mission is to empower founders with engineering that scales. We don't just deliver products; we deliver intellectual property that stands the test of time.
+                </p>
+            </div>
+            <div class="glass p-8 rounded-3xl border-bronze-glow reveal delay-200">
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-bronze font-bold text-3xl">01</h4>
+                        <p class="text-xs uppercase tracking-tighter text-gray-500">Precision Engineering</p>
+                    </div>
+                    <div>
+                        <h4 class="text-bronze font-bold text-3xl">02</h4>
+                        <p class="text-xs uppercase tracking-tighter text-gray-500">Agile Intelligence</p>
+                    </div>
+                    <div>
+                        <h4 class="text-bronze font-bold text-3xl">03</h4>
+                        <p class="text-xs uppercase tracking-tighter text-gray-500">Hardware Synergy</p>
+                    </div>
+                    <div>
+                        <h4 class="text-bronze font-bold text-3xl">04</h4>
+                        <p class="text-xs uppercase tracking-tighter text-gray-500">Scale First</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-black/40">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h2 class="text-2xl font-bold uppercase tracking-[0.3em] text-bronze mb-12 reveal">Our Vision & Mission</h2>
+            <div class="glass p-12 rounded-3xl reveal relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <i class="fas fa-quote-right text-8xl"></i>
+                </div>
+                <p class="text-xl md:text-2xl italic text-gray-300 mb-8 relative z-10">
+                    "We built CRODVTECH because the world has enough 'coding shops.' What startups actually need are engineering partners who understand the full stack—from the electrons in the circuit to the pixels on the screen."
+                </p>
+                <h4 class="text-white font-bold tracking-widest"></h4>
+                <p class="text-bronze text-xs font-mono mt-1"></p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="relative bg-[#050505] border-t border-white/5 pt-24 pb-12 overflow-hidden font-sans">
+    
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-bronze/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        
+        <div class="flex flex-col md:flex-row justify-between items-center mb-20 border-b border-white/5 pb-12">
+            <div class="mb-8 md:mb-0 text-center md:text-left">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Ready to build the impossible?</h2>
+                <p class="text-gray-500 text-sm tracking-wide">Stop searching for developers. Start partnering with engineers.</p>
+            </div>
+            <a href="index.html#contact" class="group relative px-10 py-4 bg-white text-black font-bold tracking-widest uppercase text-xs overflow-hidden rounded-sm transition-all hover:bg-bronze hover:text-white shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                <span class="relative z-10">Initiate Project</span>
+                <div class="absolute inset-0 bg-bronze transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
+            
+            <div class="md:col-span-4">
+               <a href="index.html" class="text-2xl font-black tracking-widest text-white block mb-6">
+                        CRODV<span class="text-bronze">TECH</span>
+                    </a>
+                <p class="text-gray-500 text-xs leading-7 mb-8 max-w-sm">
+                    A deep-tech engineering firm bridging the gap between Silicon and Software. We don't just write code; we architect the infrastructure of the future.
+                </p>
+             <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-black hover:bg-bronze hover:border-bronze transition duration-300">
+                       <!--  <i class="fab fa-linkedin-in"></i> -->
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-black hover:bg-bronze hover:border-bronze transition duration-300">
+                       <!--  <i class="fab fa-twitter"></i> -->
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-black hover:bg-bronze hover:border-bronze transition duration-300">
+                       <!--  <i class="fab fa-github"></i> -->
+                    </a>
+                </div>
+            </div> 
+
+            <div class="md:col-span-2">
+                <h4 class="text-white font-bold uppercase tracking-widest text-[10px] mb-6 border-l-2 border-bronze pl-3">Company</h4>
+                <ul class="space-y-4 text-xs font-medium text-gray-500">
+                    <li><a href="index.html" class="hover:text-bronze transition-colors flex items-center gap-2">Home</a></li>
+                    <li><a href="careerpage3.html" class="hover:text-bronze transition-colors flex items-center gap-2">Careers <span class="bg-bronze text-black text-[9px] px-1.5 py-0.5 rounded font-bold">HIRING</span></a></li>
+                    <li><a href="ABOUTUS.html" class="hover:text-bronze transition-colors">ABOUT US</a></li>
+                     <li><a href="SERVICES.html" class="hover:text-bronze transition-colors">SERVICES</a></li>
+                    <li><a href="#contact" class="hover:text-bronze transition-colors">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="md:col-span-2">
+                <h4 class="text-white font-bold uppercase tracking-widest text-[10px] mb-6 border-l-2 border-bronze pl-3">Expertise</h4>
+                <ul class="space-y-4 text-xs font-medium text-gray-500">
+                    <li><a href="fullstack.html" class="hover:text-bronze transition-colors">Fullstack Systems</a></li>
+                    <li><a href="ai.html" class="hover:text-bronze transition-colors">AI & LLMs</a></li>
+                    <li><a href="vlsi.html" class="hover:text-bronze transition-colors">VLSI & Hardware</a></li>
+                    <li><a href="#" class="hover:text-bronze transition-colors">DevOps & Cloud</a></li>
+                </ul>
+            </div>
+
+             <div class="md:col-span-2">
+                <h4 class="text-white font-bold uppercase tracking-widest text-[10px] mb-6 border-l-2 border-bronze pl-3">Education Division</h4>
+                <ul class="space-y-4 text-xs font-medium text-gray-500">
+                    <li><a href="https://grow02x.com/" class="hover:text-bronze transition-colors flex items-center gap-2">GROW02X</a></li>
+
+                </ul>
+            </div>
+
+            <div class="md:col-span-4">
+                <h4 class="text-white font-bold uppercase tracking-widest text-[10px] mb-6 border-l-2 border-bronze pl-3">Intelligence Feed</h4>
+                <p class="text-gray-500 text-xs mb-6">Join 4,000+ engineers receiving our monthly deep-dive into AI and Hardware trends.</p>
+                <form onsubmit="event.preventDefault();" class="relative group">
+                    <input type="email" placeholder="Enter work email" class="w-full bg-white/5 border border-white/10 py-4 px-5 text-xs text-white focus:outline-none focus:border-bronze focus:bg-white/10 transition-all rounded-sm placeholder-gray-600">
+                    <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-500 group-focus-within:text-bronze hover:text-white transition">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 text-[10px] text-gray-600 font-mono uppercase tracking-wider">
+            <p>&copy; 2024 CRODVTECH LLP. REGISTERED IN INDIA.</p>
+            <div class="flex space-x-8 mt-4 md:mt-0">
+                <a href="#" class="hover:text-bronze transition">Privacy Policy</a>
+                <a href="#" class="hover:text-bronze transition">Terms of Service</a>
+                <a href="#" class="hover:text-bronze transition">Sitemap</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <script>
+        // Particle Background Logic
+        const canvas = document.getElementById('canvas-container');
+        const ctx = canvas.getContext('2d');
+        let particlesArray;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() * 1) - 0.5;
+                this.speedY = (Math.random() * 1) - 0.5;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+                if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+            }
+            draw() {
+                ctx.fillStyle = '#d4af37';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            for (let i = 0; i < 100; i++) particlesArray.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particlesArray.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+
+        init(); animate();
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuToggle').addEventListener('click', () => {
+            document.body.classList.toggle('mobile-nav-open');
+        });
+
+        // Nav Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('glass', 'py-4');
+                nav.classList.remove('py-6');
+            } else {
+                nav.classList.remove('glass', 'py-4');
+                nav.classList.add('py-6');
+            }
+        });
+    </script>
+<script>
+    const currentPage = window.location.pathname.split("/").pop();
+
+document.querySelectorAll(".nav-link").forEach(link => {
+    const linkPage = link.getAttribute("href").split("/").pop();
+
+    if (linkPage === currentPage) {
+        link.classList.add("active");
+    }
+});
+</script>
+</body>
+</html>

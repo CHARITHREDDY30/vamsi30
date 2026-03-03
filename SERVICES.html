@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solutions | CRODVTECH</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@200;400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bronze: #d4af37;
+            --bronze-dark: #aa8036;
+            --obsidian: #050505;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--obsidian);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .text-bronze-gradient {
+            background: linear-gradient(to right, #ffffff, var(--bronze), var(--bronze-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+            color: white;
+        }
+
+        .product-glow {
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.05);
+        }
+
+        /* Particles matching index */
+        #canvas-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- NAVIGATION TRANSITIONS --- */
+#navbar {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 1px solid transparent;
+}
+
+/* This class is added via JavaScript on scroll */
+#navbar.nav-glass {
+    background: rgba(5, 5, 5, 0.8) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+/* --- MOBILE MENU OVERLAY --- */
+.mobile-menu {
+    position: fixed;
+    top: 85px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+    background: rgba(10, 10, 10, 0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 24px;
+    transform: translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+}
+
+/* State when menu is open */
+.mobile-nav-open .mobile-menu {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.mobile-menu a {
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    color: white;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.mobile-menu a:hover {
+    color: var(--bronze);
+}
+
+.mobile-menu{
+    position: fixed;
+    top: 75px;
+    left: 16px;
+    right: 16px;
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    padding:26px;
+
+    background: rgba(10,10,10,0.8);
+    backdrop-filter: blur(18px);
+
+    border-radius:18px;
+    border:1px solid rgba(212,175,55,0.15);
+
+    box-shadow:0 20px 60px rgba(0,0,0,0.7);
+
+    transform: translateY(-20px);
+    opacity:0;
+    pointer-events:none;
+
+    transition:.35s ease;
+}
+
+.mobile-menu a{
+    letter-spacing:.15em;
+    font-size:14px;
+    color:#e5e5e5;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    padding-bottom:10px;
+}
+
+.mobile-menu a:hover{
+    color:#d4af37;
+}
+
+.mobile-nav-open .mobile-menu{
+    transform: translateY(0);
+    opacity:1;
+    pointer-events:auto;
+}
+
+.nav-link{
+    transition:.25s;
+}
+
+.nav-link:hover{
+    color:#d4af37;
+}
+
+/* ACTIVE PAGE */
+/* Universal highlight for the current page */
+.nav-active{
+    color:#d4af37;
+    border-bottom:1px solid #d4af37;
+    padding-bottom:4px;
+}
+
+.mobile-menu{
+    position: fixed;
+    top: 75px;
+    left: 16px;
+    right: 16px;
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    padding:26px;
+
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(18px);
+
+    border-radius:18px;
+    border:1px solid rgba(212,175,55,0.15);
+
+    box-shadow:0 20px 60px rgba(0,0,0,0.7);
+
+    transform: translateY(-20px);
+    opacity:0;
+    pointer-events:none;
+
+    transition:.35s ease;
+}
+
+.nav-link.active {
+    color: #D4AF37;
+    border-bottom: 2px solid #D4AF37;
+}
+
+.mobile-menu a{
+    letter-spacing:.15em;
+    font-size:14px;
+    color:#e5e5e5;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    padding-bottom:10px;
+}
+
+.mobile-menu a:hover{
+    color:#d4af37;
+}
+
+.mobile-nav-open .mobile-menu{
+    transform: translateY(0);
+    opacity:1;
+    pointer-events:auto;
+}
+
+  :root {
+            --bronze: #d4af37;
+            --obsidian: #050505;
+        }
+        body { background-color: var(--obsidian); color: white; font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+        
+        .text-bronze { color: var(--bronze); }
+        .bg-bronze { background-color: var(--bronze); }
+        
+        /* Glassmorphism (Your Brand Signature) */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Professional Input Fields (Dark Mode) */
+        .input-field {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.2s;
+        }
+        .input-field:focus {
+            border-color: var(--bronze);
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+        
+        /* Background Grid */
+        .cyber-grid {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas-container"></canvas>
+
+  <body class="selection:bg-[#d4af37] selection:text-black">
+
+  <nav id="navbar" class="fixed w-full top-0 z-[9999] glass py-4">
+    
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        
+        <!-- LOGO -->
+        <a href="index.html" class="text-2xl font-black tracking-widest text-white">
+            CRODV<span class="text-bronze">TECH</span>
+        </a>
+
+        <!-- DESKTOP MENU -->
+ <div class="hidden md:flex space-x-8 text-xs font-bold tracking-widest">
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="ABOUTUS.html" class="nav-link">ABOUT US</a>
+            <a href="SERVICES.html" class="nav-link">SERVICES</a>
+            <a href="https://grow02x.com/" class="nav-link">LEARN</a>
+            <div class="relative group">
+    <a href="#" class="nav-link flex items-center gap-1">
+        CAREERS
+        <i class="fas fa-chevron-down text-[10px] transition-transform duration-300 group-hover:rotate-180"></i>
+    </a>
+
+    <!-- DROPDOWN -->
+    <div class="absolute left-0 mt-4 w-56 bg-[#0f0f0f] border border-white/10 rounded-xl opacity-0 invisible translate-y-4 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 shadow-2xl">
+
+        <a href="careerpage3.html"
+           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-black rounded-t-xl transition">
+            FULL TIME ROLES
+        </a>
+
+        <a href="INTERNSHIPS.html"
+           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-black rounded-b-xl transition">
+            INTERNSHIPS
+        </a>
+
+    </div>
+</div>
+            <a href="contactus.html" class="nav-link">CONTACT US</a>
+
+        </div>
+
+        <!-- HAMBURGER -->
+        <button id="mobileMenuToggle" class="md:hidden text-white text-2xl">
+            ☰
+        </button>
+
+    </div>
+
+    <!-- MOBILE MENU -->
+  <div class="mobile-menu md:hidden">
+        <a href="index.html" class="nav-link">HOME</a>
+        <a href="ABOUTUS.html" class="nav-link">ABOUT US</a>
+         <a href="SERVICES.html" class="nav-link">SERVICES</a>
+        <a href="https://grow02x.com/" class="nav-link">LEARN</a>
+        <div class="relative group">
+    <a href="#" class="nav-link flex items-center gap-1">
+        CAREERS
+        <i class="fas fa-chevron-down text-[10px] transition-transform duration-300 group-hover:rotate-180"></i>
+    </a>
+
+    <!-- DROPDOWN -->
+    <div class="absolute left-0 mt-4 w-56 bg-[#0f0f0f] border border-white/10 rounded-xl opacity-0 invisible translate-y-4 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 shadow-2xl">
+
+        <a href="careerpage3.html"
+           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-black rounded-t-xl transition">
+            FULL TIME ROLES
+        </a>
+
+        <a href="INTERNSHIPS.html"
+           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-black rounded-b-xl transition">
+            INTERNSHIPS
+        </a>
+
+    </div>
+</div>
+        <a href="contactus.html" class="nav-link">CONTACT US</a>
+    </div>
+</nav>
+    <section class="pt-40 pb-20 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-5xl md:text-8xl font-black mb-6 reveal">
+                ENGINEERING <br /> <span class="text-bronze-gradient">CAPABILITIES.</span>
+            </h1>
+            <p class="text-gray-500 text-lg max-w-2xl reveal delay-100">
+                From micro-architectures to macro-systems. We deploy technical excellence across three core domains, delivering proprietary hardware and software solutions.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-10 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <a href="vlsi.html" class="service-card group glass p-10 rounded-3xl border border-white/5 hover:border-bronze/50 transition-all duration-500 reveal">
+                <div class="service-icon text-bronze text-4xl mb-8 transition-transform duration-500">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 italic">01. VLSI & Hardware</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-8">
+                    Silicon architecture, FPGA prototyping, and IoT ecosystem design. We build the physical foundation of your tech.
+                </p>
+                <div class="flex items-center gap-2 text-bronze text-xs font-bold tracking-widest">
+                    EXPLORE HARDWARE <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                </div>
+            </a>
+
+            <a href="fullstack.html" class="service-card group glass p-10 rounded-3xl border border-white/5 hover:border-bronze/50 transition-all duration-500 reveal delay-100">
+                <div class="service-icon text-bronze text-4xl mb-8 transition-transform duration-500">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 italic">02. Fullstack Systems</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-8">
+                    High-concurrency web platforms, automated DevOps, and scalable SaaS infrastructure built for the next billion users.
+                </p>
+                <div class="flex items-center gap-2 text-bronze text-xs font-bold tracking-widest">
+                    EXPLORE SOFTWARE <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                </div>
+            </a>
+
+            <a href="ai.html" class="service-card group glass p-10 rounded-3xl border border-white/5 hover:border-bronze/50 transition-all duration-500 reveal delay-200">
+                <div class="service-icon text-bronze text-4xl mb-8 transition-transform duration-500">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 italic">03. AI & Intelligence</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-8">
+                    Custom LLMs, computer vision, and neural network optimization. Bridging intelligence with operational efficiency.
+                </p>
+                <div class="flex items-center gap-2 text-bronze text-xs font-bold tracking-widest">
+                    EXPLORE INTELLIGENCE <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <section class="py-32 px-6 bg-black/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-xs font-bold text-bronze uppercase tracking-[0.6em] mb-4">The Forge</h2>
+                <h3 class="text-4xl font-bold">Proprietary <span class="text-bronze-gradient">Products.</span></h3>
+            </div>
+
+            <div class="space-y-12">
+                <div class="glass product-glow p-1 flex flex-col md:flex-row items-center rounded-3xl overflow-hidden reveal">
+                    <div class="md:w-1/2 p-12">
+                        <span class="px-3 py-1 border border-bronze text-bronze text-[10px] font-bold rounded-full">FLAGSHIP</span>
+                        <h4 class="text-3xl font-bold mt-6 mb-4">CrodvCore v1.0</h4>
+                        <p class="text-gray-400 text-sm mb-8">An integrated IoT gateway designed for industrial automation, supporting ultra-low latency data transmission and hardware-level encryption.</p>
+                        <button class="text-white border-b border-white/20 pb-1 text-xs font-bold hover:text-bronze hover:border-bronze transition">REQUEST SPEC SHEET</button>
+                    </div>
+                    <div class="md:w-1/2 bg-white/5 h-full min-h-[300px] flex items-center justify-center">
+                        <i class="fas fa-box-open text-8xl text-white/10"></i>
+                    </div>
+                </div>
+
+                <div class="glass product-glow p-1 flex flex-col md:flex-row-reverse items-center rounded-3xl overflow-hidden reveal">
+                    <div class="md:w-1/2 p-12">
+                        <span class="px-3 py-1 border border-bronze text-bronze text-[10px] font-bold rounded-full">SaaS</span>
+                        <h4 class="text-3xl font-bold mt-6 mb-4">NeuralStream SDK</h4>
+                        <p class="text-gray-400 text-sm mb-8">A lightweight Python SDK for deploying edge AI models on constrained hardware environments without compromising on accuracy.</p>
+                        <button class="text-white border-b border-white/20 pb-1 text-xs font-bold hover:text-bronze hover:border-bronze transition">DOCUMENTATION</button>
+                    </div>
+                    <div class="md:w-1/2 bg-white/5 h-full min-h-[300px] flex items-center justify-center">
+                        <i class="fas fa-code-branch text-8xl text-white/10"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <footer class="relative bg-[#050505] border-t border-white/5 pt-24 pb-12 overflow-hidden font-sans">
+    
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-bronze/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        
+        <div class="flex flex-col md:flex-row justify-between items-center mb-20 border-b border-white/5 pb-12">
+            <div class="mb-8 md:mb-0 text-center md:text-left">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Ready to build the impossible?</h2>
+                <p class="text-gray-500 text-sm tracking-wide">Stop searching for developers. Start partnering with engineers.</p>
+            </div>
+            <a href="index.html #contact" class="group relative px-10 py-4 bg-white text-black font-bold tracking-widest uppercase text-xs overflow-hidden rounded-sm transition-all hover:bg-bronze hover:text-white shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                <span class="relative z-10">Initiate Project</span>
+                <div class="absolute inset-0 bg-bronze transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
+            
+            <div class="md:col-span-4">
+               <a href="index.html" class="text-2xl font-black tracking-widest text-white block mb-6">
+                        CRODV<span class="text-bronze">TECH</span>
+                    </a>
+                <p class="text-gray-500 text-xs leading-7 mb-8 max-w-sm">
+                    A deep-tech engineering firm bridging the gap between Silicon and Software. We don't just write code; we architect the infrastructure of the future.
+                </p>
+                <div class="flex space-x-4">
+                    <!-- <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-black hover:bg-bronze hover:border-bronze transition duration-300">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-black hover:bg-bronze hover:border-bronze transition duration-300">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-black hover:bg-bronze hover:border-bronze transition duration-300">
+                        <i class="fab fa-github"></i>
+                    </a> -->
+                </div>
+            </div>
+
+            <div class="md:col-span-2">
+                <h4 class="text-white font-bold uppercase tracking-widest text-[10px] mb-6 border-l-2 border-bronze pl-3">Company</h4>
+                <ul class="space-y-4 text-xs font-medium text-gray-500">
+                    <li><a href="index.html" class="hover:text-bronze transition-colors flex items-center gap-2">Home</a></li>
+                    <li><a href="careerpage3.html" class="hover:text-bronze transition-colors flex items-center gap-2">Careers <span class="bg-bronze text-black text-[9px] px-1.5 py-0.5 rounded font-bold">HIRING</span></a></li>
+                    <li><a href="ABOUTUS.html" class="hover:text-bronze transition-colors">ABOUT US</a></li>
+                     <li><a href="SERVICES.html" class="hover:text-bronze transition-colors">SERVICES</a></li>
+                     <li><a href="https://grow02x.com/" class="hover:text-bronze transition-colors">LEARN</a></li>
+                    <li><a href="#contact" class="hover:text-bronze transition-colors">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="md:col-span-2">
+                <h4 class="text-white font-bold uppercase tracking-widest text-[10px] mb-6 border-l-2 border-bronze pl-3">Expertise</h4>
+                <ul class="space-y-4 text-xs font-medium text-gray-500">
+                    <li><a href="fullstack.html" class="hover:text-bronze transition-colors">Fullstack Systems</a></li>
+                    <li><a href="ai.html" class="hover:text-bronze transition-colors">AI & LLMs</a></li>
+                    <li><a href="vlsi.html" class="hover:text-bronze transition-colors">VLSI & Hardware</a></li>
+                    <li><a href="#" class="hover:text-bronze transition-colors">DevOps & Cloud</a></li>
+                </ul>
+            </div>
+
+             <div class="md:col-span-2">
+                <h4 class="text-white font-bold uppercase tracking-widest text-[10px] mb-6 border-l-2 border-bronze pl-3">Education Division</h4>
+                <ul class="space-y-4 text-xs font-medium text-gray-500">
+                    <li><a href="https://grow02x.com/" class="hover:text-bronze transition-colors flex items-center gap-2">GROW02X</a></li>
+
+                </ul>
+            </div>
+
+            <div class="md:col-span-4">
+                <h4 class="text-white font-bold uppercase tracking-widest text-[10px] mb-6 border-l-2 border-bronze pl-3">Intelligence Feed</h4>
+                <p class="text-gray-500 text-xs mb-6">Join 4,000+ engineers receiving our monthly deep-dive into AI and Hardware trends.</p>
+                <form onsubmit="event.preventDefault();" class="relative group">
+                    <input type="email" placeholder="Enter work email" class="w-full bg-white/5 border border-white/10 py-4 px-5 text-xs text-white focus:outline-none focus:border-bronze focus:bg-white/10 transition-all rounded-sm placeholder-gray-600">
+                    <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-500 group-focus-within:text-bronze hover:text-white transition">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 text-[10px] text-gray-600 font-mono uppercase tracking-wider">
+            <p>&copy; 2024 CRODVTECH LLP. REGISTERED IN INDIA.</p>
+            <div class="flex space-x-8 mt-4 md:mt-0">
+                <a href="#" class="hover:text-bronze transition">Privacy Policy</a>
+                <a href="#" class="hover:text-bronze transition">Terms of Service</a>
+                <a href="#" class="hover:text-bronze transition">Sitemap</a>
+            </div>
+        </div>
+    </div>
+</footer>
+    <script>
+        // Particle System
+        const canvas = document.getElementById('canvas-container');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class P {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vX = (Math.random() - 0.5) * 0.5;
+                this.vY = (Math.random() - 0.5) * 0.5;
+            }
+            draw() {
+                ctx.fillStyle = '#d4af37';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 1, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            update() {
+                this.x += this.vX;
+                this.y += this.vY;
+                if(this.x < 0 || this.x > canvas.width) this.vX *= -1;
+                if(this.y < 0 || this.y > canvas.height) this.vY *= -1;
+            }
+        }
+
+        for(let i=0; i<80; i++) particles.push(new P());
+
+        function loop() {
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(loop);
+        }
+        loop();
+
+        // Reveal
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+        }, {threshold: 0.1});
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+<script>
+    // --- NAVBAR SCROLL EFFECT ---
+window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+        nav.classList.add('nav-glass');
+    } else {
+        nav.classList.remove('nav-glass');
+    }
+});
+
+// --- MOBILE MENU TOGGLE ---
+const menuToggle = document.getElementById('mobileMenuToggle');
+if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+        document.body.classList.toggle('mobile-nav-open');
+        
+        // Change icon from bars to X
+        const icon = menuToggle.querySelector('i');
+        if (document.body.classList.contains('mobile-nav-open')) {
+            icon.classList.replace('fa-bars', 'fa-times');
+        } else {
+            icon.classList.replace('fa-times', 'fa-bars');
+        }
+    });
+
+   
+}
+</script>
+<script>
+      const currentPage = window.location.pathname.split("/").pop();
+
+document.querySelectorAll(".nav-link").forEach(link => {
+    const linkPage = link.getAttribute("href").split("/").pop();
+
+    if (linkPage === currentPage) {
+        link.classList.add("active");
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internships | CRODVTECH Future Talent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+         :root {
+            --bronze: #d4af37;
+            --obsidian: #050505;
+        }
+        body { background-color: var(--obsidian); color: white; font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+        
+        .text-bronze { color: var(--bronze); }
+        .bg-bronze { background-color: var(--bronze); }
+        
+        /* Glassmorphism (Your Brand Signature) */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Professional Input Fields (Dark Mode) */
+        .input-field {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.2s;
+        }
+        .input-field:focus {
+            border-color: var(--bronze);
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+        
+        /* Background Grid */
+        .cyber-grid {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        }
+
+        /* ===== PREMIUM MOBILE NAV ===== */
+
+.mobile-menu{
+    position: fixed;
+    top: 75px;
+    left: 16px;
+    right: 16px;
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    padding:26px;
+
+    background: rgba(10,10,10,0.8);
+    backdrop-filter: blur(18px);
+
+    border-radius:18px;
+    border:1px solid rgba(212,175,55,0.15);
+
+    box-shadow:0 20px 60px rgba(0,0,0,0.7);
+
+    transform: translateY(-20px);
+    opacity:0;
+    pointer-events:none;
+
+    transition:.35s ease;
+}
+
+.mobile-menu a{
+    letter-spacing:.15em;
+    font-size:14px;
+    color:#e5e5e5;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    padding-bottom:10px;
+}
+
+.mobile-menu a:hover{
+    color:#d4af37;
+}
+
+.mobile-nav-open .mobile-menu{
+    transform: translateY(0);
+    opacity:1;
+    pointer-events:auto;
+}
+
+.nav-link{
+    transition:.25s;
+}
+
+.nav-link:hover{
+    color:#d4af37;
+}
+
+/* ACTIVE PAGE */
+.nav-active{
+    color:#d4af37;
+    border-bottom:1px solid #d4af37;
+    padding-bottom:4px;
+}
+
+.mobile-menu{
+    position: fixed;
+    top: 75px;
+    left: 16px;
+    right: 16px;
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    padding:26px;
+
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(18px);
+
+    border-radius:18px;
+    border:1px solid rgba(212,175,55,0.15);
+
+    box-shadow:0 20px 60px rgba(0,0,0,0.7);
+
+    transform: translateY(-20px);
+    opacity:0;
+    pointer-events:none;
+
+    transition:.35s ease;
+}
+
+.mobile-menu a{
+    letter-spacing:.15em;
+    font-size:14px;
+    color:#e5e5e5;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    padding-bottom:10px;
+}
+
+.mobile-menu a:hover{
+    color:#d4af37;
+}
+
+.mobile-nav-open .mobile-menu{
+    transform: translateY(0);
+    opacity:1;
+    pointer-events:auto;
+}
+
+
+    </style>
+    </style>
+</head>
+<body>
+
+     <nav id="navbar" class="fixed w-full top-0 z-[9999] glass py-4">
+    
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        
+        <!-- LOGO -->
+        <a href="index.html" class="text-2xl font-black tracking-widest text-white">
+            CRODV<span class="text-bronze">TECH</span>
+        </a>
+
+        <!-- DESKTOP MENU -->
+        <div class="hidden md:flex space-x-8 text-xs font-bold tracking-widest">
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="ABOUTUS.html" class="nav-link">ABOUT US</a>
+            <a href="SERVICES.html" class="nav-link">SERVICES</a>
+             <a href="https://grow02x.com/" class="nav-link">LEARN</a>
+            <div class="relative group">
+    <a href="#" class="nav-link flex items-center gap-1">
+        CAREERS
+        <i class="fas fa-chevron-down text-[10px] transition-transform duration-300 group-hover:rotate-180"></i>
+    </a>
+
+    <!-- DROPDOWN -->
+    <div class="absolute left-0 mt-4 w-56 bg-[#0f0f0f] border border-white/10 rounded-xl opacity-0 invisible translate-y-4 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 shadow-2xl">
+
+        <a href="careerpage3.html"
+           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-black rounded-t-xl transition">
+            FULL TIME ROLES
+        </a>
+
+        <a href="INTERNSHIPS.html"
+           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-black rounded-b-xl transition">
+            INTERNSHIPS
+        </a>
+
+    </div>
+</div>
+            <a href="contactus.html" class="nav-link">CONTACT US</a>
+
+        </div>
+
+        <!-- HAMBURGER -->
+        <button id="mobileMenuToggle" class="md:hidden text-white text-2xl">
+            ☰
+        </button>
+
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu md:hidden">
+        <a href="index.html" class="nav-link">HOME</a>
+        <a href="ABOUTUS.html" class="nav-link">ABOUT US</a>
+        <a href="SERVICES.html" class="nav-link">SERVICES</a>
+        <a href="https://grow02x.com/" class="nav-link">LEARN</a>
+         <div class="relative group">
+    <a href="#" class="nav-link flex items-center gap-1">
+        CAREERS
+        <i class="fas fa-chevron-down text-[10px] transition-transform duration-300 group-hover:rotate-180"></i>
+    </a>
+
+    <!-- DROPDOWN -->
+    <div class="absolute left-0 mt-4 w-56 bg-[#0f0f0f] border border-white/10 rounded-xl opacity-0 invisible translate-y-4 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 shadow-2xl">
+
+        <a href="careerpage3.html"
+           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-black rounded-t-xl transition">
+            FULL TIME ROLES
+        </a>
+
+        <a href="INTERNSHIPS.html"
+           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-black rounded-b-xl transition">
+            INTERNSHIPS
+        </a>
+
+    </div>
+</div>
+        <a href="contactus.html" class="nav-link">CONTACT</a>
+    </div>
+
+</nav>
+
+
+    <section class="relative pt-40 pb-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <div class="inline-block mb-4 px-3 py-1 border border-bronze/30 rounded-full bg-bronze/5">
+                <span class="text-bronze text-[10px] font-bold tracking-widest uppercase">Launch Your Engineering Career</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
+                ARCHITECT THE <br> <span class="text-bronze-gradient">NEXT GENERATION.</span>
+            </h1>
+            <p class="text-gray-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+                Our internship program bridges the gap between theoretical learning at Grow02x Academy and high-stakes industrial execution. 
+                Join Crodvtech to solve real problems in VLSI, AI, and Fullstack Systems.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-center text-xs font-bold tracking-[0.3em] text-gray-500 uppercase mb-12">Available Specializations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-2xl hover:border-bronze transition-all group">
+                    <i class="fas fa-microchip text-3xl text-bronze mb-6 block"></i>
+                    <h3 class="text-xl font-bold mb-3">Silicon & VLSI</h3>
+                    <p class="text-gray-500 text-sm mb-6">Work on RTL coding, verification, and FPGA implementations for next-gen IoT nodes.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[9px] border border-white/10 px-2 py-1 rounded uppercase">FPGA</span>
+                        <span class="text-[9px] border border-white/10 px-2 py-1 rounded uppercase">Verilog</span>
+                    </div>
+                </div>
+                <div class="glass p-8 rounded-2xl hover:border-bronze transition-all group">
+                    <i class="fas fa-brain text-3xl text-bronze mb-6 block"></i>
+                    <h3 class="text-xl font-bold mb-3">AI Implementation</h3>
+                    <p class="text-gray-500 text-sm mb-6">Fine-tune LLMs and develop computer vision pipelines for real-world automation.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[9px] border border-white/10 px-2 py-1 rounded uppercase">PyTorch</span>
+                        <span class="text-[9px] border border-white/10 px-2 py-1 rounded uppercase">LLMs</span>
+                    </div>
+                </div>
+                <div class="glass p-8 rounded-2xl hover:border-bronze transition-all group">
+                    <i class="fas fa-layer-group text-3xl text-bronze mb-6 block"></i>
+                    <h3 class="text-xl font-bold mb-3">Fullstack Systems</h3>
+                    <p class="text-gray-500 text-sm mb-6">Engineer scalable web architectures using React and Node.js for our EdTech ecosystem.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[9px] border border-white/10 px-2 py-1 rounded uppercase">Next.js</span>
+                        <span class="text-[9px] border border-white/10 px-2 py-1 rounded uppercase">Cloud</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-black/50">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-16 text-center">THE <span class="text-bronze">JOURNEY</span></h2>
+            <div class="space-y-12 relative">
+                <div class="step-line"></div>
+                <div class="relative pl-16">
+                    <div class="absolute left-0 w-10 h-10 bg-bronze rounded-full flex items-center justify-center text-black font-bold z-10">01</div>
+                    <h4 class="font-bold text-lg text-white">Academy Enrollment</h4>
+                    <p class="text-gray-500 text-sm">Master your fundamentals through Grow02x EdTech programs.</p>
+                </div>
+                <div class="relative pl-16">
+                    <div class="absolute left-0 w-10 h-10 bg-white/10 border border-bronze rounded-full flex items-center justify-center text-bronze font-bold z-10">02</div>
+                    <h4 class="font-bold text-lg text-white">Technical Evaluation</h4>
+                    <p class="text-gray-500 text-sm">Prove your skills through a hardware-software bridge challenge.</p>
+                </div>
+                <div class="relative pl-16">
+                    <div class="absolute left-0 w-10 h-10 bg-white/10 border border-bronze rounded-full flex items-center justify-center text-bronze font-bold z-10">03</div>
+                    <h4 class="font-bold text-lg text-white">Engineering Internship</h4>
+                    <p class="text-gray-500 text-sm">3-6 months of intensive building with the Crodvtech core team.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="open-roles" class="py-24 max-w-5xl mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-10 text-white">Internships</h2>
+
+        <div class="flex gap-4 mb-8 overflow-x-auto pb-2">
+            <button class="px-4 py-2 bg-bronze text-black rounded-full text-xs font-bold uppercase tracking-widest">All Roles</button>
+            <button class="px-4 py-2 bg-white/5 border border-white/10 text-gray-400 hover:text-white rounded-full text-xs font-bold uppercase tracking-widest transition">Engineering</button>
+            <button class="px-4 py-2 bg-white/5 border border-white/10 text-gray-400 hover:text-white rounded-full text-xs font-bold uppercase tracking-widest transition">Hardware</button>
+        </div>
+
+        <div class="space-y-4">
+            
+            <div class="glass p-6 rounded-xl cursor-pointer flex flex-col md:flex-row justify-between items-start md:items-center group">
+                <div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-bronze transition">Senior Fullstack Engineer</h3>
+                    <p class="text-gray-500 text-sm mt-1">Remote • Engineering • Full Time</p>
+                </div>
+                <button onclick="document.getElementById('application-form').scrollIntoView({behavior: 'smooth'})" class="mt-4 md:mt-0 px-6 py-2 border border-white/20 rounded-full text-xs font-bold uppercase hover:bg-white hover:text-black transition">
+                    Apply
+                </button>
+            </div>
+
+            <div class="glass p-6 rounded-xl cursor-pointer flex flex-col md:flex-row justify-between items-start md:items-center group">
+                <div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-bronze transition">AI/ML Research Scientist</h3>
+                    <p class="text-gray-500 text-sm mt-1">Hyderabad • R&D Team • Hybrid</p>
+                </div>
+                <button onclick="document.getElementById('application-form').scrollIntoView({behavior: 'smooth'})" class="mt-4 md:mt-0 px-6 py-2 border border-white/20 rounded-full text-xs font-bold uppercase hover:bg-white hover:text-black transition">
+                    Apply
+                </button>
+            </div>
+
+            <div class="glass p-6 rounded-xl cursor-pointer flex flex-col md:flex-row justify-between items-start md:items-center group">
+                <div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-bronze transition">VLSI Design Engineer</h3>
+                    <p class="text-gray-500 text-sm mt-1">Bangalore • Hardware • Onsite</p>
+                </div>
+                <button onclick="document.getElementById('application-form').scrollIntoView({behavior: 'smooth'})" class="mt-4 md:mt-0 px-6 py-2 border border-white/20 rounded-full text-xs font-bold uppercase hover:bg-white hover:text-black transition">
+                    Apply
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="apply" class="py-24">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="glass p-10 rounded-3xl border-bronze/30 shadow-2xl">
+                <h2 class="text-3xl font-black mb-2 uppercase text-center">SEND YOUR <span class="text-bronze">APPLICATION</span></h2>
+                <!-- <p class="text-center text-gray-500 text-[10px] tracking-[0.3em] mb-12 uppercase">[ Status: Accepting Interns ]</p> -->
+
+                <form action="https://api.web3forms.com/submit" method="POST" id="internForm" class="space-y-6" enctype="multipart/form-data">
+                    <input type="hidden" name="access_key" value="96edafdd-3df5-4add-98fa-3031a1132293">
+                    <input type="hidden" name="subject" value="Internship Application - Crodvtech">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input type="text" name="name" required placeholder="FULL NAME" class="w-full bg-white/5 border border-white/10 p-4 rounded text-xs tracking-widest text-white">
+                        <input type="email" name="email" required placeholder="EMAIL ADDRESS" class="w-full bg-white/5 border border-white/10 p-4 rounded text-xs tracking-widest text-white">
+                    </div>
+
+                    <select name="track" required class="w-full bg-black border border-white/10 p-4 rounded text-xs tracking-widest text-gray-400">
+                        <option value="" disabled selected>SELECT YOUR TRACK</option>
+                        <option value="VLSI">VLSI & Hardware</option>
+                        <option value="AI">AI & Machine Learning</option>
+                        <option value="Fullstack">Fullstack Development</option>
+                    </select>
+
+                    <div class="border border-dashed border-white/20 p-8 text-center rounded-xl bg-white/5 hover:bg-white/10 transition relative">
+                        <input type="file" name="resume" required class="absolute inset-0 opacity-0 cursor-pointer" onchange="document.getElementById('fileName').innerText = this.files[0].name">
+                        <p id="fileName" class="text-gray-500 text-[10px] font-bold tracking-[0.2em]">[ UPLOAD RESUME.PDF ]</p>
+                    </div>
+
+                    <textarea name="why_us" rows="3" placeholder="WHY ARE YOU A FIT FOR THE FORGE?" class="w-full bg-white/5 border border-white/10 p-4 rounded text-xs tracking-widest text-white"></textarea>
+
+                    <button type="submit" id="submitBtn" class="w-full py-5 bg-[#d4af37] text-black font-black uppercase tracking-[0.3em] hover:bg-white transition-all duration-500">
+                        TRANSMIT APPLICATION
+                    </button>
+                    <p id="formStatus" class="hidden text-center text-green-500 text-[10px] font-bold tracking-widest mt-4">UPLINK SUCCESSFUL. MESSAGE RECEIVED.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-white/10 text-center">
+        <p class="text-[10px] text-gray-600 tracking-[0.3em] uppercase">&copy; 2025 CRODVTECH Engineering Foundry. REGISTERED IN INDIA</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('internForm');
+        const status = document.getElementById('formStatus');
+        const btn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            btn.innerText = "TRANSMITTING...";
+            btn.disabled = true;
+
+            const formData = new FormData(form);
+            fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData })
+            .then(response => {
+                if (response.status === 200) {
+                    btn.innerText = "TRANSMITTED";
+                    btn.style.backgroundColor = "#22c55e";
+                    status.classList.remove('hidden');
+                    form.reset();
+                } else {
+                    btn.innerText = "RETRY";
+                    btn.disabled = false;
+                }
+            }).catch(() => {
+                btn.innerText = "ERROR";
+                btn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRODVTECH | VLSI & Hardware</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bronze: #d4af37;
+            --obsidian: #0b0b0b;
+        }
+        body { background-color: var(--obsidian); color: white; font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+        
+        .font-mono-tech { font-family: 'Share Tech Mono', monospace; }
+        .text-bronze { color: var(--bronze); }
+        .bg-bronze { background-color: var(--bronze); }
+        
+        /* Schematic Grid Background */
+        .blueprint-grid {
+            background-image: 
+                linear-gradient(rgba(212, 175, 55, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        /* Technical Card Styling */
+        .schematic-card {
+            background: rgba(5, 5, 5, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .schematic-card:hover {
+            border-color: var(--bronze);
+            background: rgba(20, 20, 20, 0.9);
+        }
+        /* Corner Accents */
+        .schematic-card::before { content: ''; position: absolute; top: -1px; left: -1px; width: 10px; height: 10px; border-top: 2px solid var(--bronze); border-left: 2px solid var(--bronze); }
+        .schematic-card::after { content: ''; position: absolute; bottom: -1px; right: -1px; width: 10px; height: 10px; border-bottom: 2px solid var(--bronze); border-right: 2px solid var(--bronze); }
+
+        /* Marquee */
+        .marquee-container { overflow: hidden; white-space: nowrap; position: relative; }
+        .marquee-content { display: inline-block; animation: marquee 25s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        .nav-link{
+    transition:.25s;
+}
+
+.nav-link:hover{
+    color:#d4af37;
+}
+
+/* ACTIVE PAGE */
+.nav-active{
+    color:#d4af37;
+    border-bottom:1px solid #d4af37;
+    padding-bottom:4px;
+}
+
+.mobile-menu{
+    position: fixed;
+    top:95px;
+    left:16px;
+    right:16px;
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    padding:26px;
+
+    background: rgba(5,5,5,0.96);
+    backdrop-filter: blur(10px);
+
+    border-radius:18px;
+    border:1px solid rgba(212,175,55,0.15);
+
+    box-shadow:0 20px 60px rgba(0,0,0,0.9);
+
+    transform: translateY(-20px);
+    opacity:0;
+    pointer-events:none;
+
+    transition:.35s ease;
+
+    z-index:10000;
+    isolation:isolate;
+}
+
+
+.mobile-menu a{
+    letter-spacing:.15em;
+    font-size:14px;
+    color:#e5e5e5;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    padding-bottom:10px;
+}
+
+.mobile-menu a:hover{
+    color:#d4af37;
+}
+
+.mobile-nav-open .mobile-menu{
+    transform: translateY(0);
+    opacity:1;
+    pointer-events:auto;
+}
+
+/* GLASS NAVBAR */
+.glass{
+    background: rgba(5,5,5,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
+#navbar{
+    z-index:9999;
+}
+
+.mobile-menu{
+    top:95px;
+}
+
+
+    </style>
+</head>
+<body class="blueprint-grid selection:bg-yellow-600 selection:text-black">
+ <nav id="navbar" class="fixed w-full top-0 z-[9999] glass py-4">
+    
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        
+        <!-- LOGO -->
+        <a href="index.html" class="text-2xl font-black tracking-widest text-white">
+            CRODV<span class="text-bronze">TECH</span>
+        </a>
+
+        <!-- DESKTOP MENU -->
+        <div class="hidden md:flex space-x-8 text-xs font-bold tracking-widest">
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="fullstack.html" class="nav-link">FULLSTACK</a>
+            <a href="ai.html" class="nav-link">AI & ML</a>
+            <a href="vlsi.html" class="nav-link">VLSI & IOT</a>
+            <a href="careerpage3.html" class="nav-link">CAREERS</a>
+            <a href="#" class="nav-link">CONTACT</a>
+        </div>
+
+        <!-- HAMBURGER -->
+        <button id="mobileMenuToggle" class="md:hidden text-white text-2xl">
+            ☰
+        </button>
+
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu md:hidden">
+        <a href="index.html" class="nav-link">HOME</a>
+        <a href="fullstack.html" class="nav-link">FULLSTACK</a>
+        <a href="ai.html" class="nav-link">AI & ML</a>
+        <a href="vlsi.html" class="nav-link">VLSI & IOT</a>
+        <a href="careerpage3.html" class="nav-link">CAREERS</a>
+        <a href="#" class="nav-link">CONTACT</a>
+    </div>
+
+</nav>
+
+
+    <section class="relative pt-40 pb-20 px-6 min-h-[85vh] flex items-center">
+        <div class="max-w-7xl mx-auto w-full">
+           
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h1 class="text-6xl md:text-8xl font-black uppercase mb-6 leading-none">
+                        Deep Tech <br> 
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-600">Engineering.</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg mb-8 max-w-lg">
+                        We don't just write software; we design the silicon it runs on. From <strong>FPGA Prototyping</strong> to <strong>IoT Sensor Networks</strong>.
+                    </p>
+                    <a href="#projects" class="inline-block px-10 py-4 bg-transparent border-2 border-bronze text-white font-bold tracking-widest hover:bg-bronze hover:text-black transition uppercase">
+                        View Hardware
+                    </a>
+                </div>
+                
+                <div class="relative p-6 border border-white/10 bg-black/50 rounded-lg">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-bronze to-transparent"></div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="h-24 bg-white/5 border border-white/10 flex items-center justify-center font-mono-tech text-xs text-gray-500">CPU CORE 1</div>
+                        <div class="h-24 bg-white/5 border border-white/10 flex items-center justify-center font-mono-tech text-xs text-gray-500">CPU CORE 2</div>
+                        <div class="col-span-2 h-16 bg-bronze/10 border border-bronze/30 flex items-center justify-center font-mono-tech text-xs text-bronze">SHARED CACHE L3</div>
+                        <div class="col-span-2 h-10 bg-black border border-white/10 flex items-center justify-center font-mono-tech text-[10px] text-gray-600">/// DATA BUS INTERFACE ///</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8 bg-[#0a0a0a] border-y border-white/10 overflow-hidden relative">
+        <div class="marquee-container">
+            <div class="marquee-content text-2xl font-mono-tech text-gray-600 space-x-12 uppercase">
+                <span>Verilog</span> <span>VHDL</span> <span>FPGA (Xilinx)</span> <span>ARM Cortex</span> <span>ESP32</span> <span>MQTT</span> <span>SystemVerilog</span> <span>KiCad</span> <span>Arduino</span> <span>Raspberry Pi</span>
+                <span>Verilog</span> <span>VHDL</span> <span>FPGA (Xilinx)</span> <span>ARM Cortex</span> <span>ESP32</span> <span>MQTT</span> <span>SystemVerilog</span> <span>KiCad</span> <span>Arduino</span> <span>Raspberry Pi</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div class="schematic-card p-10">
+                <div class="flex justify-between items-start mb-6">
+                    <h2 class="text-3xl font-bold font-mono-tech text-white">01. VLSI DESIGN</h2>
+                    <i class="fas fa-microchip text-bronze text-2xl"></i>
+                </div>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                    We offer end-to-end design verification. Whether you are building a custom ASIC or prototyping on an FPGA, we write efficient, synthesizable code.
+                </p>
+                <ul class="space-y-4 text-gray-500 text-xs font-mono-tech">
+                    <li class="flex items-center"><span class="w-1 h-1 bg-bronze mr-3"></span> RTL Design & Verification</li>
+                    <li class="flex items-center"><span class="w-1 h-1 bg-bronze mr-3"></span> Static Timing Analysis</li>
+                    <li class="flex items-center"><span class="w-1 h-1 bg-bronze mr-3"></span> Low Power Design</li>
+                </ul>
+            </div>
+
+            <div class="schematic-card p-10">
+                <div class="flex justify-between items-start mb-6">
+                    <h2 class="text-3xl font-bold font-mono-tech text-white">02. IoT SYSTEMS</h2>
+                    <i class="fas fa-wifi text-bronze text-2xl"></i>
+                </div>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                    Connecting the physical world to the digital. We build smart sensor networks that communicate reliably with cloud dashboards.
+                </p>
+                <ul class="space-y-4 text-gray-500 text-xs font-mono-tech">
+                    <li class="flex items-center"><span class="w-1 h-1 bg-bronze mr-3"></span> Smart Home Automation</li>
+                    <li class="flex items-center"><span class="w-1 h-1 bg-bronze mr-3"></span> Industrial IoT (IIoT)</li>
+                    <li class="flex items-center"><span class="w-1 h-1 bg-bronze mr-3"></span> Firmware Development (C/C++)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-24 bg-black border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-bold font-mono-tech mb-12 text-white">PROJECTS</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="schematic-card p-0 group overflow-hidden">
+                    <div class="h-56 bg-[#151515] relative flex items-center justify-center border-b border-white/10">
+                        <i class="fas fa-memory text-5xl text-gray-800 group-hover:text-bronze transition duration-500"></i>
+                        <div class="absolute top-2 right-2 font-mono-tech text-[10px] text-bronze border border-bronze px-2">PROTOTYPE</div>
+                        </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">High-Speed Memory Controller</h3>
+                        <p class="text-gray-500 text-xs leading-relaxed mb-4">
+                            Designed a DDR3 memory controller using Verilog, verified on Xilinx Artix-7 FPGA with zero timing violations.
+                        </p>
+                        <a href="#" class="text-bronze text-xs font-bold font-mono-tech hover:underline">VIEW SCHEMATIC >></a>
+                    </div>
+                </div>
+
+                <div class="schematic-card p-0 group overflow-hidden">
+                    <div class="h-56 bg-[#151515] relative flex items-center justify-center border-b border-white/10">
+                        <i class="fas fa-industry text-5xl text-gray-800 group-hover:text-bronze transition duration-500"></i>
+                        <div class="absolute top-2 right-2 font-mono-tech text-[10px] text-bronze border border-bronze px-2">DEPLOYED</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Smart Warehouse System</h3>
+                        <p class="text-gray-500 text-xs leading-relaxed mb-4">
+                            IoT network of 50+ ESP32 sensors monitoring temperature and humidity, sending data to AWS IoT Core via MQTT.
+                        </p>
+                        <a href="#" class="text-bronze text-xs font-bold font-mono-tech hover:underline">VIEW ARCHITECTURE >></a>
+                    </div>
+                </div>
+
+                <div class="schematic-card p-0 group overflow-hidden">
+                    <div class="h-56 bg-[#151515] relative flex items-center justify-center border-b border-white/10">
+                        <i class="fas fa-car-battery text-5xl text-gray-800 group-hover:text-bronze transition duration-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">BMS for EVs</h3>
+                        <p class="text-gray-500 text-xs leading-relaxed mb-4">
+                            Battery Management System simulation for Electric Vehicles to optimize charging cycles and prevent overheating.
+                        </p>
+                        <a href="#" class="text-bronze text-xs font-bold font-mono-tech hover:underline">VIEW SIMULATION >></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#0b0b0b] border-t border-white/10 py-8 text-center font-mono-tech text-xs text-gray-600">
+        <p>CRODVTECH SYSTEM STATUS: OPERATIONAL</p>
+    </footer>
+
+    <script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const toggle = document.getElementById("mobileMenuToggle");
+
+    if(!toggle) return;
+
+    toggle.addEventListener("click", function(){
+
+        document.body.classList.toggle("mobile-nav-open");
+
+        toggle.innerHTML =
+        document.body.classList.contains("mobile-nav-open")
+        ? "✕"
+        : "☰";
+
+    });
+
+});
+
+</script>
+<script>
+
+const links = document.querySelectorAll(".nav-link");
+const currentPage = window.location.pathname.split("/").pop();
+
+links.forEach(link => {
+
+    const linkPage = link.getAttribute("href");
+
+    if(linkPage === currentPage){
+        link.classList.add("nav-active");
+    }
+
+});
+
+</script>
+
+</body>
+</html>
