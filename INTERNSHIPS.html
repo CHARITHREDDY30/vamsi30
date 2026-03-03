@@ -189,12 +189,12 @@
     <div class="absolute left-0 mt-4 w-56 bg-[#0f0f0f] border border-white/10 rounded-xl opacity-0 invisible translate-y-4 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 shadow-2xl">
 
         <a href="careerpage3.html"
-           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-black rounded-t-xl transition">
+           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-white rounded-t-xl transition">
             FULL TIME ROLES
         </a>
 
         <a href="INTERNSHIPS.html"
-           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-black rounded-b-xl transition">
+           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-white rounded-b-xl transition">
             INTERNSHIPS
         </a>
 
@@ -227,12 +227,12 @@
     <div class="absolute left-0 mt-4 w-56 bg-[#0f0f0f] border border-white/10 rounded-xl opacity-0 invisible translate-y-4 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 shadow-2xl">
 
         <a href="careerpage3.html"
-           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-black rounded-t-xl transition">
+           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-white rounded-t-xl transition">
             FULL TIME ROLES
         </a>
 
         <a href="INTERNSHIPS.html"
-           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-black rounded-b-xl transition">
+           class="block px-5 py-3 text-xs tracking-widest text-gray-300 hover:bg-bronze hover:text-white rounded-b-xl transition">
             INTERNSHIPS
         </a>
 
@@ -320,47 +320,59 @@
 
     <section id="open-roles" class="py-24 max-w-5xl mx-auto px-6">
         <h2 class="text-3xl font-bold mb-10 text-white">Internships</h2>
-
         <div class="flex gap-4 mb-8 overflow-x-auto pb-2">
-            <button class="px-4 py-2 bg-bronze text-black rounded-full text-xs font-bold uppercase tracking-widest">All Roles</button>
-            <button class="px-4 py-2 bg-white/5 border border-white/10 text-gray-400 hover:text-white rounded-full text-xs font-bold uppercase tracking-widest transition">Engineering</button>
-            <button class="px-4 py-2 bg-white/5 border border-white/10 text-gray-400 hover:text-white rounded-full text-xs font-bold uppercase tracking-widest transition">Hardware</button>
-        </div>
+    <button class="filter-btn active-filter px-4 py-2 bg-bronze text-black rounded-full text-xs font-bold uppercase tracking-widest" data-filter="all">All Roles</button>
+    <button class="filter-btn px-4 py-2 bg-white/5 border border-white/10 text-gray-400 hover:text-white rounded-full text-xs font-bold uppercase tracking-widest transition" data-filter="engineering">Engineering</button>
+    <button class="filter-btn px-4 py-2 bg-white/5 border border-white/10 text-gray-400 hover:text-white rounded-full text-xs font-bold uppercase tracking-widest transition" data-filter="hardware">Hardware</button>
+</div>
 
         <div class="space-y-4">
-            
-            <div class="glass p-6 rounded-xl cursor-pointer flex flex-col md:flex-row justify-between items-start md:items-center group">
-                <div>
-                    <h3 class="text-lg font-bold text-white group-hover:text-bronze transition">Senior Fullstack Engineer</h3>
-                    <p class="text-gray-500 text-sm mt-1">Remote • Engineering • Full Time</p>
-                </div>
-                <button onclick="document.getElementById('application-form').scrollIntoView({behavior: 'smooth'})" class="mt-4 md:mt-0 px-6 py-2 border border-white/20 rounded-full text-xs font-bold uppercase hover:bg-white hover:text-black transition">
-                    Apply
-                </button>
-            </div>
+    <div class="role-card glass p-6 rounded-xl flex flex-col md:flex-row justify-between items-start md:items-center group" data-category="hardware">
+        <div>
+            <h3 class="text-lg font-bold text-white group-hover:text-bronze transition">Silicon & VLSI Intern</h3>
+            <p class="text-gray-500 text-sm mt-1">Hybrid / Remote · 3–6 Months</p>
+        </div>
+        <button onclick="document.getElementById('apply').scrollIntoView({behavior: 'smooth'})" class="mt-4 md:mt-0 px-6 py-2 border border-white/20 rounded-full text-xs font-bold uppercase hover:bg-white hover:text-black transition">
+            Apply
+        </button>
+    </div>
 
-            <div class="glass p-6 rounded-xl cursor-pointer flex flex-col md:flex-row justify-between items-start md:items-center group">
-                <div>
-                    <h3 class="text-lg font-bold text-white group-hover:text-bronze transition">AI/ML Research Scientist</h3>
-                    <p class="text-gray-500 text-sm mt-1">Hyderabad • R&D Team • Hybrid</p>
-                </div>
-                <button onclick="document.getElementById('application-form').scrollIntoView({behavior: 'smooth'})" class="mt-4 md:mt-0 px-6 py-2 border border-white/20 rounded-full text-xs font-bold uppercase hover:bg-white hover:text-black transition">
-                    Apply
-                </button>
-            </div>
+    <div class="role-card glass p-6 rounded-xl flex flex-col md:flex-row justify-between items-start md:items-center group" data-category="engineering">
+        <div>
+            <h3 class="text-lg font-bold text-white group-hover:text-bronze transition">ML Engineering Intern</h3>
+            <p class="text-gray-500 text-sm mt-1">Remote · 3–6 Months</p>
+        </div>
+        <button onclick="document.getElementById('apply').scrollIntoView({behavior: 'smooth'})" class="mt-4 md:mt-0 px-6 py-2 border border-white/20 rounded-full text-xs font-bold uppercase hover:bg-white hover:text-black transition">
+            Apply
+        </button>
+    </div>
 
-            <div class="glass p-6 rounded-xl cursor-pointer flex flex-col md:flex-row justify-between items-start md:items-center group">
-                <div>
-                    <h3 class="text-lg font-bold text-white group-hover:text-bronze transition">VLSI Design Engineer</h3>
-                    <p class="text-gray-500 text-sm mt-1">Bangalore • Hardware • Onsite</p>
-                </div>
-                <button onclick="document.getElementById('application-form').scrollIntoView({behavior: 'smooth'})" class="mt-4 md:mt-0 px-6 py-2 border border-white/20 rounded-full text-xs font-bold uppercase hover:bg-white hover:text-black transition">
-                    Apply
-                </button>
-            </div>
-
+    <div class="role-card glass p-6 rounded-xl flex flex-col md:flex-row justify-between items-start md:items-center group" data-category="engineering">
+        <div>
+            <h3 class="text-lg font-bold text-white group-hover:text-bronze transition">Fullstack Systems Intern</h3>
+            <p class="text-gray-500 text-sm mt-1">Hybrid · 3–6 Months</p>
+        </div>
+        <button onclick="document.getElementById('apply').scrollIntoView({behavior: 'smooth'})" class="mt-4 md:mt-0 px-6 py-2 border border-white/20 rounded-full text-xs font-bold uppercase hover:bg-white hover:text-black transition">
+            Apply
+        </button>
+    </div>
+</div>
         </div>
     </section>
+<div>
+    
+    <section class="py-16 bg-black/40 border-y border-white/5">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+        
+        <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">
+            Performance Leads to <span class="text-bronze">Opportunity</span>
+        </h3>
+
+        <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+            High-performing interns are offered full-time roles at CRODVTECH.
+        </p>
+    </div>
+</section>
 
     <section id="apply" class="py-24">
         <div class="max-w-3xl mx-auto px-6">
@@ -378,7 +390,7 @@
                     </div>
 
                     <select name="track" required class="w-full bg-black border border-white/10 p-4 rounded text-xs tracking-widest text-gray-400">
-                        <option value="" disabled selected>SELECT YOUR TRACK</option>
+                        <option value="" disabled selected>SELECT YOUR DOMAIN</option>
                         <option value="VLSI">VLSI & Hardware</option>
                         <option value="AI">AI & Machine Learning</option>
                         <option value="Fullstack">Fullstack Development</option>
@@ -431,6 +443,97 @@
                 btn.disabled = false;
             });
         });
-    </script>
+
+       <script>
+    // --- 1. Form Submission Logic ---
+    const form = document.getElementById('internForm');
+    const status = document.getElementById('formStatus');
+    const btn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        btn.innerText = "TRANSMITTING...";
+        btn.disabled = true;
+
+        const formData = new FormData(form);
+        fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData })
+        .then(response => {
+            if (response.status === 200) {
+                btn.innerText = "TRANSMITTED";
+                btn.style.backgroundColor = "#22c55e";
+                status.classList.remove('hidden');
+                form.reset();
+            } else {
+                btn.innerText = "RETRY";
+                btn.disabled = false;
+            }
+        }).catch(() => {
+            btn.innerText = "ERROR";
+            btn.disabled = false;
+        });
+    });
+
+    // --- 2. Filter Logic (FIXED) ---
+    document.querySelectorAll('.filter-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const filter = button.getAttribute('data-filter');
+            const cards = document.querySelectorAll('.role-card');
+
+            // Update Button Styles
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-bronze', 'text-black');
+                btn.classList.add('bg-white/5', 'text-gray-400');
+            });
+            button.classList.add('bg-bronze', 'text-black');
+            button.classList.remove('bg-white/5', 'text-gray-400');
+
+            // Filter Cards
+            cards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                    card.style.display = 'flex';
+                    card.style.opacity = '1';
+                } else {
+                    card.style.display = 'none';
+                    card.style.opacity = '0';
+                }
+            });
+        });
+    });
+<script>
+    document.getElementById('mobileMenuToggle').addEventListener('click', function() {
+        document.body.classList.toggle('mobile-nav-open');
+    });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+    const toggle = document.getElementById("mobileMenuToggle");
+    const body = document.body;
+
+    if(!toggle) return;
+
+    toggle.addEventListener("click", function(){
+
+        body.classList.toggle("mobile-nav-open");
+
+        // Change icon
+        if(body.classList.contains("mobile-nav-open")){
+            toggle.innerHTML = "✕";
+        } else {
+            toggle.innerHTML = "☰";
+        }
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll(".mobile-menu a").forEach(link=>{
+        link.addEventListener("click", ()=>{
+            body.classList.remove("mobile-nav-open");
+            toggle.innerHTML = "☰";
+        });
+    });
+
+});
+</script>
 </body>
 </html>
